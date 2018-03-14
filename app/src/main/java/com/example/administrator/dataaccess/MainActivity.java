@@ -1,9 +1,11 @@
 package com.example.administrator.dataaccess;
 
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -13,14 +15,15 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-
     final String FILE_NAME = "fileDB.bin";
+    DatabaseHelper mDatabaseHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +36,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button getBtn = (Button)findViewById(R.id.main_act_get_btn);
         setBtn.setOnClickListener(this);
         getBtn.setOnClickListener(this);
+
+        mDatabaseHelper = new DatabaseHelper(this);
     }
 
     @Override
@@ -57,7 +62,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.getDataWithSQLite();
                 break;
             case R.id.main_act_creat_btn:
-                this.creatSQLite();
                 break;
 
         }
@@ -99,14 +103,40 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             e.printStackTrace();
         }
     }
-    private void setDataWithSQLite(){
 
+    private void setDataWithSQLite(){
+        //增
+//        AddData("第一个数据");
+//        AddData("第二个数据");
+//        AddData("第三个数据");
+        //删
+        deleteData();
     }
     private void getDataWithSQLite(){
-
+        Cursor data = mDatabaseHelper.getData();
+        ArrayList<String> listData = new ArrayList<>();
+        while(data.moveToNext()){
+            //get value from database column 1
+            // then add it to ArrayList
+            Log.d("1001","" + data.getInt(1));
+        }
     }
-    private void creatSQLite(){
-//        SQLiteDatabase db = SQLiteDatabase.openOrCreateDatabase("/mnt/db/temp.db3",null);
-//        String sql = "create table user"
+    //添加数据
+    public void AddData(String newEntry){
+        boolean insertData = mDatabaseHelper.addData(newEntry);
+
+        if(insertData)
+            toastMessage("Data Successfully Inserted!");
+        else
+            toastMessage("Something went wrong :(");
+    }
+    //删除数据
+    private void deleteData(){
+        mDatabaseHelper.deleteName(0,"第一个数据");
+        mDatabaseHelper.deleteName(3,"第一个数据");
+        mDatabaseHelper.deleteName(6,"第一个数据");
+    }
+    private void toastMessage(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 }
