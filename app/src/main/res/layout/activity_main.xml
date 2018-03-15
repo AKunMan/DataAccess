@@ -8,18 +8,15 @@
         android:id="@+id/main_act_set_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
         android:text="@string/main_set"/>
     <Button
         android:id="@+id/main_act_get_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
         android:text="@string/main_get"/>
     <Button
         android:id="@+id/main_act_creat_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="btnClick"
         android:text="@string/main_create"/>
 </LinearLayout>

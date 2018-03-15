@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -18,7 +19,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -27,15 +28,22 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);//去除标题
         setContentView(R.layout.activity_main);
 
         preferences = getSharedPreferences("shared_preferences",MODE_PRIVATE);
         editor = preferences.edit();
 
+        Button setBtn = (Button)findViewById(R.id.main_act_set_btn);
+        Button getBtn = (Button)findViewById(R.id.main_act_get_btn);
+        setBtn.setOnClickListener(this);
+        getBtn.setOnClickListener(this);
+
         mDatabaseHelper = new DatabaseHelper(this);
     }
 
-    public void btnClick(View view){
+    @Override
+    public void onClick(View view) {
         switch (view.getId()){
             case R.id.main_act_set_btn://存数据
                 //SharedPreferences
@@ -45,7 +53,7 @@ public class MainActivity extends AppCompatActivity{
                 //SQLite
                 this.setDataWithSQLite();
 
-                Toast.makeText(MainActivity.this,"存入数据成功",Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this,"存入数据成功",Toast.LENGTH_SHORT).show();
                 break;
             case R.id.main_act_get_btn://读取数据
                 //SharedPreferences
@@ -60,32 +68,6 @@ public class MainActivity extends AppCompatActivity{
 
         }
     }
-//    @Override
-//    public void onClick(View view) {
-//        switch (view.getId()){
-//            case R.id.main_act_set_btn://存数据
-//                //SharedPreferences
-////                this.setDataWithSharedPreferences();
-//                //File
-////                this.setDataWithFile();
-//                //SQLite
-//                this.setDataWithSQLite();
-//
-//            Toast.makeText(MainActivity.this,"存入数据成功",Toast.LENGTH_SHORT).show();
-//                break;
-//            case R.id.main_act_get_btn://读取数据
-//                //SharedPreferences
-////                this.getDataWithSharedPreferences();
-//                //File
-////                this.getDataWithFile();
-//                //SQLite
-//                this.getDataWithSQLite();
-//                break;
-//            case R.id.main_act_creat_btn:
-//                break;
-//
-//        }
-//    }
 
     private void setDataWithSharedPreferences(){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy年mm月dd日");
