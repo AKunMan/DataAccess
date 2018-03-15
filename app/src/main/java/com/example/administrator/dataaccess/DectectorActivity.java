@@ -18,9 +18,14 @@ public class DectectorActivity extends AppCompatActivity implements GestureDetec
     }
 
     @Override
+    public boolean onTouchEvent(MotionEvent event) {
+        return gestureDetector.onTouchEvent(event);
+    }
+
+    @Override
     public boolean onDown(MotionEvent motionEvent) {
         toastMessage("onDown");
-        return true;
+        return false;
     }
 
     @Override
@@ -31,13 +36,13 @@ public class DectectorActivity extends AppCompatActivity implements GestureDetec
     @Override
     public boolean onSingleTapUp(MotionEvent motionEvent) {
         toastMessage("onSingleTapUp");
-        return true;
+        return false;
     }
 
     @Override
     public boolean onScroll(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         toastMessage("onScroll");
-        return true;
+        return false;
     }
 
     @Override
@@ -48,7 +53,7 @@ public class DectectorActivity extends AppCompatActivity implements GestureDetec
     @Override
     public boolean onFling(MotionEvent motionEvent, MotionEvent motionEvent1, float v, float v1) {
         toastMessage("onFling");
-        return true;
+        return false;
     }
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();

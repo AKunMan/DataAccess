@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         while(data.moveToNext()){
             //get value from database column 1
             // then add it to ArrayList
-            Log.d("1001","" + data.getInt(1));
+            Log.d("mylog","" + data.getString(1));
         }
     }
     //添加数据
@@ -132,9 +132,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     //删除数据
     private void deleteData(){
-        mDatabaseHelper.deleteName(0,"第一个数据");
-        mDatabaseHelper.deleteName(3,"第一个数据");
-        mDatabaseHelper.deleteName(6,"第一个数据");
+        int deleteTempIndex = -1;
+        Cursor cursor = mDatabaseHelper.getItemID("第一个数据");
+        while(cursor.moveToNext()) {
+            deleteTempIndex = cursor.getInt(0);
+            if(deleteTempIndex >= 0) {
+                mDatabaseHelper.deleteName(deleteTempIndex,"第一个数据");
+                deleteTempIndex = -1;
+            }
+        }
     }
     private void toastMessage(String message) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
