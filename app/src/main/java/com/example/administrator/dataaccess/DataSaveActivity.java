@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.example.administrator.dataaccess.utils.Utils;
 
+import java.util.Map;
+
 public class DataSaveActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etQQ;
@@ -27,9 +29,20 @@ public class DataSaveActivity extends AppCompatActivity implements View.OnClickL
         etPWD = (EditText)findViewById(R.id.ds_PWD);
         cbRememberPWD = (CheckBox)findViewById(R.id.ds_cb_rememberPWD);
 
+        intiData();
         Button loginBtn = (Button)findViewById(R.id.ds_btn_login);
         loginBtn.setOnClickListener(this);
 
+    }
+    private void intiData(){
+        Map<String,String> userMap = Utils.getUserInfo();
+        if (userMap != null){
+            etQQ.setText(userMap.get("qq"));
+            etPWD.setText(userMap.get("pwd"));
+            etPWD.setFocusable(true);
+            etPWD.setFocusableInTouchMode(true);
+            etPWD.requestFocus();
+        }
     }
 
     @Override
