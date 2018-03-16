@@ -6,6 +6,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.widget.Toast;
 
+import com.example.administrator.dataaccess.R;
+
 public class DectectorActivity extends AppCompatActivity implements GestureDetector.OnGestureListener{
 
     GestureDetector gestureDetector;

@@ -1,4 +1,4 @@
-package com.example.administrator.dataaccess;
+package com.example.administrator.dataaccess.utils;
 
 import android.content.ContentValues;
 import android.content.Context;

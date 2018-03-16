@@ -10,6 +10,8 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.administrator.dataaccess.utils.Utils;
+
 public class DataSaveActivity extends AppCompatActivity implements View.OnClickListener{
 
     private EditText etQQ;
@@ -43,9 +45,12 @@ public class DataSaveActivity extends AppCompatActivity implements View.OnClickL
         boolean rememberPwd = cbRememberPWD.isChecked();
         //3、登录
         if (rememberPwd){
-            Log.d("login","记住密码登录点击");
-        }else {
-            Log.d("login","不记住密码登录点击");
+            if (Utils.saveUserInfo(qq,pwd)){
+                Log.d("login","记住密码成功");
+            }else {
+                Log.d("login","记住密码失败");
+            }
         }
+        Utils.toastMessage(DataSaveActivity.this,"登录成功");
     }
 }
