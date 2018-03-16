@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/ds_QQ"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/ds_sendQQ"/>
+    <EditText
+        android:id="@+id/ds_PWD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/ds_snedPWD"
+        android:inputType="textPassword"/>
+    <CheckBox
+        android:id="@+id/ds_cb_rememberPWD"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ds_rememberPWD"/>
+    <Button
+        android:id="@+id/ds_btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ds_login"/>
+</LinearLayout>
