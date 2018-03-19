@@ -1,5 +1,6 @@
 package com.example.administrator.dataaccess;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.example.administrator.dataaccess.service.MyService;
 import com.example.administrator.dataaccess.utils.DatabaseHelper;
 
 import java.io.FileInputStream;
@@ -44,6 +46,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
+
+        Intent serviceIntent = new Intent(MainActivity.this, MyService.class);
         switch (view.getId()){
             case R.id.main_act_set_btn://存数据
                 //SharedPreferences
@@ -51,9 +55,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //File
 //                this.setDataWithFile();
                 //SQLite
-                this.setDataWithSQLite();
+//                this.setDataWithSQLite();
+//            Toast.makeText(MainActivity.this,"存入数据成功",Toast.LENGTH_SHORT).show();
 
-            Toast.makeText(MainActivity.this,"存入数据成功",Toast.LENGTH_SHORT).show();
+                //启动service
+                startService(serviceIntent);
                 break;
             case R.id.main_act_get_btn://读取数据
                 //SharedPreferences
@@ -61,7 +67,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //File
 //                this.getDataWithFile();
                 //SQLite
-                this.getDataWithSQLite();
+//                this.getDataWithSQLite();
+
+                //停止service
+                stopService(serviceIntent);
                 break;
             case R.id.main_act_creat_btn:
                 break;
